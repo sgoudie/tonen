@@ -1,11 +1,25 @@
 createOsc = ( ctx, type, noteLength, frequency, detune ) => {
-  let osc = ctx.createOscillator();
+  let osc = ctx.createOscillator(),
+      gainNode = ctx.createGain(),
+      attackTime = 0.5,
+      releaseTime = 0.5;
+  //Signal flow
+  osc.connect(gainNode);
+  gainNode.connect( ctx.destination );
+
+  gainNode.gain.value = 0;
+
+  //Sets up osc
   osc.frequency.value = frequency;
   osc.detune.value = detune;
   osc.type = type;
-  osc.connect( ctx.destination );
-  osc.start( 0 );
-  osc.stop( ctx.currentTime + noteLength );
+  //Starts osc
+  osc.start();
+  gainNode.gain.setValueAtTime(0, ctx.currentTime);
+  gainNode.gain.linearRampToValueAtTime(0.6, ctx.currentTime + attackTime);
+  //Ramps down to stop click (waveform)
+  gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + attackTime + noteLength + releaseTime);
+  osc.stop(ctx.currentTime + attackTime + noteLength + releaseTime +1);
 };
 
 
@@ -13,7 +27,7 @@ Synth = React.createClass({
   getInitialState() {
     return {
       frequency: 440,
-      noteLength: 1,
+      noteLength: 5,
       detune: 50
     };
   },
