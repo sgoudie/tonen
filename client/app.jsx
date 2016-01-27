@@ -1,8 +1,9 @@
 App = React.createClass({
   render() {
     return (
-      <div>
+      <div className="container">
         <h1>tönen</h1>
+        <Synth />
       </div>
     );
   }
