@@ -6,8 +6,8 @@ RangeSlider = React.createClass({
   },
   render() {
     return (
-      <div>
-        <label>{ this.props.label }</label>
+      <div className="control-slider">
+        <label>{ this.props.label } - { this.props.defaultValue }</label>
         <input
           ref="range"
           type="range"

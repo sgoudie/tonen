@@ -2,7 +2,7 @@ createOsc = ( ctx, type, noteLength, frequency, detune ) => {
   let osc = ctx.createOscillator(),
       gainNode = ctx.createGain(),
       attackTime = 0.5,
-      releaseTime = 0.5;
+      decayTime = 0.5;
   //Signal flow
   osc.connect(gainNode);
   gainNode.connect( ctx.destination );
@@ -18,8 +18,8 @@ createOsc = ( ctx, type, noteLength, frequency, detune ) => {
   gainNode.gain.setValueAtTime(0, ctx.currentTime);
   gainNode.gain.linearRampToValueAtTime(0.6, ctx.currentTime + attackTime);
   //Ramps down to stop click (waveform)
-  gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + attackTime + noteLength + releaseTime);
-  osc.stop(ctx.currentTime + attackTime + noteLength + releaseTime +1);
+  gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + attackTime + noteLength + decayTime);
+  osc.stop(ctx.currentTime + attackTime + noteLength + decayTime + 1);
 };
 
 
@@ -53,9 +53,9 @@ Synth = React.createClass({
     return (
       <div className="synth">
         <h2>{ this.state.frequency }hz - { this.state.detune }</h2>
-        <RangeSlider label='Frequency' defaultValue={ this.state.frequency } onUserInput={ this.frequencyChange } min='50' max='1000' />
-        <RangeSlider label='Detune' defaultValue={ this.state.detune } onUserInput={ this.detuneChange } min='0' max='1000' />
-        <button onClick={ this.playNote }>Play Note</button>
+        <RangeSlider label='Frequenz' defaultValue={ this.state.frequency } onUserInput={ this.frequencyChange } min='50' max='1000' />
+        <RangeSlider label='Stimmen' defaultValue={ this.state.detune } onUserInput={ this.detuneChange } min='0' max='1000' />
+        <button onClick={ this.playNote }>Spielhinweis</button>
       </div>
     );
   }
