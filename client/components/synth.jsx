@@ -1,35 +1,47 @@
+createOsc = ( ctx, type, noteLength, frequency, detune ) => {
+  let osc = ctx.createOscillator();
+  osc.frequency.value = frequency;
+  osc.detune.value = detune;
+  osc.type = type;
+  osc.connect( ctx.destination );
+  osc.start( 0 );
+  osc.stop( ctx.currentTime + noteLength );
+};
+
+
 Synth = React.createClass({
   getInitialState() {
     return {
       frequency: 440,
-      gain: 0.5
+      noteLength: 1,
+      detune: 50
     };
   },
-  handleUserInput(frequency) {
+  frequencyChange( frequency ) {
     this.setState({
       frequency: frequency
     });
   },
-  playNote(frequency, ctx) {
-    let source = ctx.createOscillator();
-    source.frequency.value = frequency;
-    source.connect(ctx.destination);
-    source.start(0);
-    source.stop(ctx.currentTime + 1);
+  detuneChange( detune ) {
+    this.setState({
+      detune: detune
+    });
   },
-  componentWillMount() {
-    //Creates the audio context
-    this.masterGain = this.props.ctx.createGain();
-    this.masterGain.gain.value = this.state.gain;
-    this.masterGain.connect(this.props.ctx.destination);
+  playNote() {
+    let ctx = this.props.ctx,
+        frequency = this.state.frequency,
+        noteLength = this.state.noteLength,
+        detune = this.state.detune;
+    createOsc( ctx, 'sine', noteLength, frequency, 0 );
+    createOsc( ctx, 'sine', noteLength, frequency, -detune );
   },
   render() {
-    let self = this;
     return (
       <div className="synth">
-        <h2>{this.state.frequency}hz</h2>
-        <RangeSlider defaultValue={ this.state.frequency } onUserInput={ this.handleUserInput } />
-        { this.playNote(this.state.frequency, self.props.ctx) }
+        <h2>{ this.state.frequency }hz - { this.state.detune }</h2>
+        <RangeSlider label='Frequency' defaultValue={ this.state.frequency } onUserInput={ this.frequencyChange } min='50' max='1000' />
+        <RangeSlider label='Detune' defaultValue={ this.state.detune } onUserInput={ this.detuneChange } min='0' max='1000' />
+        <button onClick={ this.playNote }>Play Note</button>
       </div>
     );
   }

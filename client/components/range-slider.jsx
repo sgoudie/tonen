@@ -7,11 +7,12 @@ RangeSlider = React.createClass({
   render() {
     return (
       <div>
+        <label>{ this.props.label }</label>
         <input
           ref="range"
           type="range"
-          min="0"
-          max="2000"
+          min={ this.props.min }
+          max={ this.props.max }
           defaultValue={ this.props.defaultValue }
           onChange={ this.handleChange }
         />
