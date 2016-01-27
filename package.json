@@ -1,0 +1,8 @@
+{
+    "name": "tonen",
+    "version": "0.1.0",
+    "description": "A simple React instrument",
+    "scripts": {
+      "start": "meteor --settings settings-development.json"
+    }
+}

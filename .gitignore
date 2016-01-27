@@ -1,0 +1,7 @@
+# Operating System
+.DS_Store
+
+# Configuration
+settings-development.json
+settings-production.json
+npm-debug.log
