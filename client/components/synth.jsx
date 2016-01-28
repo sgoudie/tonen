@@ -56,6 +56,9 @@ Synth = React.createClass({
         <RangeSlider label='Frequenz' type='freq' defaultValue={ this.state.frequency } onUserInput={ this.frequencyChange } min='50' max='1000' />
         <RangeSlider label='Stimmen' defaultValue={ this.state.detune } onUserInput={ this.detuneChange } min='0' max='1000' />
         <button onClick={ this.playNote }>Spielen</button>
+        <ChordPad label="Gmaj" note1={ notes.g2 } note2={ notes.b3 } note3={ notes.d3 }/>
+        <ChordPad label="Cmaj" note1={ notes.c3 } note2={ notes.e3 } note3={ notes.g3 }/>
+        <ChordPad label="Dmin" note1={ notes.d3 } note2={ notes.f3 } note3={ notes.a4 }/>
       </div>
     );
   }
