@@ -22,7 +22,6 @@ createOsc = ( ctx, type, noteLength, frequency, detune ) => {
   osc.stop(ctx.currentTime + attackTime + noteLength + decayTime + 1);
 };
 
-
 Synth = React.createClass({
   getInitialState() {
     return {
@@ -53,6 +52,7 @@ Synth = React.createClass({
     return (
       <div className="synth">
         <h2>{ this.state.frequency }hz - { this.state.detune }</h2>
+        <WaveSelector />
         <RangeSlider label='Frequenz' type='freq' defaultValue={ this.state.frequency } onUserInput={ this.frequencyChange } min='50' max='1000' />
         <RangeSlider label='Stimmen' defaultValue={ this.state.detune } onUserInput={ this.detuneChange } min='0' max='1000' />
         <button onClick={ this.playNote }>Spielen</button>
