@@ -6,7 +6,7 @@ RangeSlider = React.createClass({
   },
   render() {
     let units;
-    this.props.type === 'freq' ? units = 'hz' : units = '';
+    if(this.props.type === 'freq') units = 'hz';
     return (
       <div className="control-slider">
         <label>{ this.props.label } - { this.props.defaultValue }{ units }</label>

@@ -1,0 +1,16 @@
+.control-slider {
+  margin: $baseline 0;
+}
+
+.control-slider label {
+  font-size: $baseline*0.6;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  display: block;
+}
+
+.control-slider input[type='range'] {
+  width: 100%;
+  max-width: 300px;
+}

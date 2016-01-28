@@ -13,34 +13,6 @@ body {
   margin: 0 auto;
 }
 
-button {
-  background-color: transparent;
-  border: 2px solid $feature-color;
-  margin-top: $baseline;
-  padding: $baseline/2;
-  color: $feature-color;
-  font-size: $baseline*0.8;
-  font-weight: 700;
-  &:hover {
-    cursor: pointer;
-    background-color: $feature-color;
-    color: $background-color;
-  }
-}
-
-.control-slider {
-  margin: $baseline 0;
-}
-
-.control-slider label {
-  font-size: $baseline*0.6;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 700;
-  display: block;
-}
-
-.control-slider input[type='range'] {
-  width: 100%;
-  max-width: 300px;
-}
+//Components
+@import "components/_button";
+@import "components/_control-slider";

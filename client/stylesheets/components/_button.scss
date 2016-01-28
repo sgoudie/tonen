@@ -1,0 +1,14 @@
+button {
+  background-color: transparent;
+  border: 2px solid $feature-color;
+  margin-top: $baseline;
+  padding: $baseline/2;
+  color: $feature-color;
+  font-size: $baseline*0.8;
+  font-weight: 700;
+  &:hover {
+    cursor: pointer;
+    background-color: $feature-color;
+    color: $background-color;
+  }
+}
