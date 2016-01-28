@@ -1,4 +1,4 @@
-createOsc = ( ctx, type, noteLength, frequency, detune ) => {
+createOsc = ( ctx, wave, noteLength, frequency, detune ) => {
   let osc = ctx.createOscillator(),
       gainNode = ctx.createGain(),
       attackTime = 0.5,
@@ -12,7 +12,7 @@ createOsc = ( ctx, type, noteLength, frequency, detune ) => {
   //Sets up osc
   osc.frequency.value = frequency;
   osc.detune.value = detune;
-  osc.type = type;
+  osc.type = wave;
   //Starts osc
   osc.start();
   gainNode.gain.setValueAtTime(0, ctx.currentTime);
@@ -27,8 +27,14 @@ Synth = React.createClass({
     return {
       frequency: 440,
       noteLength: 5,
-      detune: 50
+      detune: 5,
+      wave: 'sine'
     };
+  },
+  waveChange( wave ) {
+    this.setState({
+      wave: wave
+    });
   },
   frequencyChange( frequency ) {
     this.setState({
@@ -44,17 +50,18 @@ Synth = React.createClass({
     let ctx = this.props.ctx,
         frequency = this.state.frequency,
         noteLength = this.state.noteLength,
-        detune = this.state.detune;
-    createOsc( ctx, 'sine', noteLength, frequency, 0 );
-    createOsc( ctx, 'sine', noteLength, frequency, -detune );
+        detune = this.state.detune,
+        wave = this.state.wave;
+    createOsc( ctx, wave, noteLength, frequency, 0 );
+    createOsc( ctx, wave, noteLength, frequency, -detune );
   },
   render() {
     return (
       <div className="synth">
         <h2>{ this.state.frequency }hz - { this.state.detune }</h2>
-        <WaveSelector />
+        <WaveSelector defaultValue={ this.state.wave } onUserInput={ this.waveChange }/>
         <RangeSlider label='Frequenz' type='freq' defaultValue={ this.state.frequency } onUserInput={ this.frequencyChange } min='50' max='1000' />
-        <RangeSlider label='Stimmen' defaultValue={ this.state.detune } onUserInput={ this.detuneChange } min='0' max='1000' />
+        <RangeSlider label='Stimmen' defaultValue={ this.state.detune } onUserInput={ this.detuneChange } min='0' max='30' />
         <button onClick={ this.playNote }>Spielen</button>
         <ChordPad label="Gmaj" note1={ notes.g2 } note2={ notes.b3 } note3={ notes.d3 }/>
         <ChordPad label="Cmaj" note1={ notes.c3 } note2={ notes.e3 } note3={ notes.g3 }/>
