@@ -14,8 +14,9 @@ Synth = React.createClass({
       noteLength: 5,
       detune: 5,
       wave: 'sine',
-      lfo: 20,
-      lfoWave: 'sine'
+      lfoRate: 20,
+      lfoWave: 'sine',
+      lfoLevel: 10
     };
   },
   //Takes control from component id
@@ -31,12 +32,13 @@ Synth = React.createClass({
         noteLength = this.state.noteLength,
         detune = this.state.detune,
         wave = this.state.wave,
-        lfo = this.state.lfo,
-        lfoWave = this.state.lfoWave;
+        lfoRate = this.state.lfoRate,
+        lfoWave = this.state.lfoWave,
+        lfoLevel = this.state.lfoLevel;
 
     let osc1 = newOsc( ctx, wave, frequency, 0 ),
         osc2 = newOsc( ctx, wave, frequency/2 , -detune );
-        lfo = newOsc( ctx, lfoWave, lfo, 0 ),
+        lfo = newOsc( ctx, lfoWave, lfoRate, 0 ),
         gainNode = ctx.createGain(),
         masterGain = ctx.createGain(),
         attackTime = 0.5,
@@ -46,7 +48,7 @@ Synth = React.createClass({
     osc2.connect(masterGain);
 
     //'Range' of gain node +/-
-    gainNode.gain.value = 100;
+    gainNode.gain.value = lfoLevel;
     //plugs in 'gain' output to osc frequency (LFO)
 		gainNode.connect(osc1.frequency);
 		gainNode.connect(osc2.frequency);
@@ -74,8 +76,12 @@ Synth = React.createClass({
         <WaveSelector id='wave' defaultValue={ this.state.wave } onUserInput={ this.controlChange }/>
         <RangeSlider id='frequency' label='Frequenz' type='freq' defaultValue={ this.state.frequency } onUserInput={ this.controlChange } min='50' max='1000' />
         <RangeSlider id='detune' label='Stimmen' defaultValue={ this.state.detune } onUserInput={ this.controlChange } min='0' max='30' />
-        <RangeSlider id='lfo' label='LFO' type='freq' defaultValue={ this.state.lfo } onUserInput={ this.controlChange } min='1' max='100' />
-        <WaveSelector id='lfoWave' defaultValue={ this.state.lfoWave } onUserInput={ this.controlChange }/>
+        <div className="synth-module">
+          <h4>LFO</h4>
+          <RangeSlider id='lfoRate' label='Häufigkeit' type='freq' defaultValue={ this.state.lfoRate } onUserInput={ this.controlChange } min='1' max='100' />
+          <RangeSlider id='lfoLevel' label='Lautstärke' defaultValue={ this.state.lfoLevel } onUserInput={ this.controlChange } min='0' max='100' />
+          <WaveSelector id='lfoWave' defaultValue={ this.state.lfoWave } onUserInput={ this.controlChange }/>
+        </div>
         <button onClick={ this.playNote }>Spielen</button>
       </div>
     );
