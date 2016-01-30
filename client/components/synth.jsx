@@ -17,24 +17,11 @@ Synth = React.createClass({
       lfo: 20
     };
   },
-  waveChange( wave ) {
+  //Takes control from component id
+  //Flexible method for all controls
+  controlChange( control, value ) {
     this.setState({
-      wave: wave
-    });
-  },
-  frequencyChange( frequency ) {
-    this.setState({
-      frequency: frequency
-    });
-  },
-  detuneChange( detune ) {
-    this.setState({
-      detune: detune
-    });
-  },
-  lfoChange( lfo ) {
-    this.setState({
-      lfo: lfo
+      [control]: value
     });
   },
   playNote() {
@@ -82,10 +69,10 @@ Synth = React.createClass({
     return (
       <div className="synth">
         <h2>{ this.state.frequency }hz - { this.state.detune }</h2>
-        <WaveSelector defaultValue={ this.state.wave } onUserInput={ this.waveChange }/>
-        <RangeSlider label='Frequenz' type='freq' defaultValue={ this.state.frequency } onUserInput={ this.frequencyChange } min='50' max='1000' />
-        <RangeSlider label='Stimmen' defaultValue={ this.state.detune } onUserInput={ this.detuneChange } min='0' max='30' />
-        <RangeSlider label='LFO' type='freq' defaultValue={ this.state.lfo } onUserInput={ this.lfoChange } min='1' max='100' />
+        <WaveSelector id='wave' defaultValue={ this.state.wave } onUserInput={ this.controlChange }/>
+        <RangeSlider id='frequency' label='Frequenz' type='freq' defaultValue={ this.state.frequency } onUserInput={ this.controlChange } min='50' max='1000' />
+        <RangeSlider id='detune' label='Stimmen' defaultValue={ this.state.detune } onUserInput={ this.controlChange } min='0' max='30' />
+        <RangeSlider id='lfo' label='LFO' type='freq' defaultValue={ this.state.lfo } onUserInput={ this.controlChange } min='1' max='100' />
         <button onClick={ this.playNote }>Spielen</button>
       </div>
     );
