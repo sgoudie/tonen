@@ -1,25 +1,10 @@
-createOsc = ( ctx, wave, noteLength, frequency, detune ) => {
-  let osc = ctx.createOscillator(),
-      gainNode = ctx.createGain(),
-      attackTime = 0.5,
-      decayTime = 0.5;
-  //Signal flow
-  osc.connect(gainNode);
-  gainNode.connect( ctx.destination );
-
-  gainNode.gain.value = 0;
-
-  //Sets up osc
+//Creates a new osc
+newOsc = ( ctx, wave, frequency, detune ) => {
+  let osc = ctx.createOscillator();
   osc.frequency.value = frequency;
   osc.detune.value = detune;
   osc.type = wave;
-  //Starts osc
-  osc.start();
-  gainNode.gain.setValueAtTime(0, ctx.currentTime);
-  gainNode.gain.linearRampToValueAtTime(0.6, ctx.currentTime + attackTime);
-  //Ramps down to stop click (waveform)
-  gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + attackTime + noteLength + decayTime);
-  osc.stop(ctx.currentTime + attackTime + noteLength + decayTime + 1);
+  return osc;
 };
 
 Synth = React.createClass({
@@ -28,7 +13,8 @@ Synth = React.createClass({
       frequency: 440,
       noteLength: 5,
       detune: 5,
-      wave: 'sine'
+      wave: 'sine',
+      lfo: 20
     };
   },
   waveChange( wave ) {
@@ -46,14 +32,51 @@ Synth = React.createClass({
       detune: detune
     });
   },
+  lfoChange( lfo ) {
+    this.setState({
+      lfo: lfo
+    });
+  },
   playNote() {
     let ctx = this.props.ctx,
         frequency = this.state.frequency,
         noteLength = this.state.noteLength,
         detune = this.state.detune,
-        wave = this.state.wave;
-    createOsc( ctx, wave, noteLength, frequency, 0 );
-    createOsc( ctx, wave, noteLength, frequency, -detune );
+        wave = this.state.wave,
+        lfo = this.state.lfo;
+
+    let osc1 = newOsc( ctx, wave, frequency, 0 ),
+        osc2 = newOsc( ctx, wave, frequency/2, -detune );
+        lfo = newOsc( ctx, 'square', lfo, 0 ),
+        gainNode = ctx.createGain(),
+        masterGain = ctx.createGain(),
+        attackTime = 0.5,
+        decayTime = 0.5;
+
+    osc1.connect(masterGain);
+    osc2.connect(masterGain);
+
+    //'Range' of gain node +/-
+    gainNode.gain.value = 100;
+    //plugs in 'gain' output to osc frequency (LFO)
+		gainNode.connect(osc1.frequency);
+		gainNode.connect(osc2.frequency);
+    lfo.connect(gainNode);
+
+    masterGain.connect( ctx.destination );
+
+    //Starts osc
+    osc1.start();
+    osc2.start();
+    lfo.start();
+
+    //Ramps down to stop click (waveform)
+    masterGain.gain.setValueAtTime(0, ctx.currentTime);
+    masterGain.gain.linearRampToValueAtTime(0.6, ctx.currentTime + attackTime);
+    masterGain.gain.linearRampToValueAtTime(0, ctx.currentTime + attackTime + noteLength + decayTime);
+    osc1.stop(ctx.currentTime + attackTime + noteLength + decayTime + 1);
+    osc2.stop(ctx.currentTime + attackTime + noteLength + decayTime + 1);
+    lfo.stop(ctx.currentTime + attackTime + noteLength + decayTime + 1);
   },
   render() {
     return (
@@ -62,10 +85,8 @@ Synth = React.createClass({
         <WaveSelector defaultValue={ this.state.wave } onUserInput={ this.waveChange }/>
         <RangeSlider label='Frequenz' type='freq' defaultValue={ this.state.frequency } onUserInput={ this.frequencyChange } min='50' max='1000' />
         <RangeSlider label='Stimmen' defaultValue={ this.state.detune } onUserInput={ this.detuneChange } min='0' max='30' />
+        <RangeSlider label='LFO' type='freq' defaultValue={ this.state.lfo } onUserInput={ this.lfoChange } min='1' max='100' />
         <button onClick={ this.playNote }>Spielen</button>
-        <ChordPad label="Gmaj" note1={ notes.g2 } note2={ notes.b3 } note3={ notes.d3 }/>
-        <ChordPad label="Cmaj" note1={ notes.c3 } note2={ notes.e3 } note3={ notes.g3 }/>
-        <ChordPad label="Dmin" note1={ notes.d3 } note2={ notes.f3 } note3={ notes.a4 }/>
       </div>
     );
   }
