@@ -7,18 +7,18 @@ WaveSelector = React.createClass({
   },
   render() {
     return (
-      <div id={ this.props.id } className="wave-selector">
+      <div className="wave-selector">
         <label>
-          <input type="radio" name="waveTypes" value="sine" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'sine' } /> Sinus
+          <input type="radio" name={ this.props.id } value="sine" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'sine' } /> Sinus
         </label>
         <label>
-          <input type="radio" name="waveTypes" value="sawtooth" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'sawtooth' } /> Sägezahn
+          <input type="radio" name={ this.props.id } value="sawtooth" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'sawtooth' } /> Sägezahn
         </label>
         <label>
-          <input type="radio" name="waveTypes" value="square" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'square' } /> Quadrat
+          <input type="radio" name={ this.props.id } value="square" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'square' } /> Quadrat
         </label>
         <label>
-          <input type="radio" name="waveTypes" value="triangle" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'triangle' } /> Triangel
+          <input type="radio" name={ this.props.id } value="triangle" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'triangle' } /> Triangel
         </label>
       </div>
     );
