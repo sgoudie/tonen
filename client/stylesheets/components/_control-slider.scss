@@ -12,7 +12,6 @@
 
 .control-slider input[type='range'] {
   width: 100%;
-  max-width: 300px;
 }
 
 //Style range input
@@ -71,7 +70,7 @@ $track-radius: $border-radius-base;
   }
 
   &:focus::-webkit-slider-runnable-track {
-    background: darken($background-color, 10%);
+    background: darken($background-color, 5%);
   }
 
   &:focus::-webkit-slider-thumb {
@@ -98,7 +97,7 @@ $track-radius: $border-radius-base;
   }
 
   &::-ms-fill-lower {
-    background: darken($background-color, 10%);
+    background: darken($background-color, 5%);
     border: $track-border-width solid $track-border-color;
     border-radius: $track-radius * 2;
   }
@@ -118,7 +117,7 @@ $track-radius: $border-radius-base;
   }
 
   &:focus::-ms-fill-upper {
-    background: darken($background-color, 10%);
+    background: darken($background-color, 5%);
   }
 
   &:focus::-moz-range-thumb {
