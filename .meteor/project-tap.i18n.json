@@ -1,0 +1,16 @@
+{
+  "helper_name": "_",
+  "supported_languages": {
+    "en" : {
+      "name" : "English",
+      "en" : "English",
+      "de" : "Englisch"
+    },
+    "de" : {
+      "name" : "Deutsch",
+      "en" : "German",
+      "de" : "Deutsch"
+    }
+  },
+  "preloaded_langs": []
+}

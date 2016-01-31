@@ -20,8 +20,10 @@ App = React.createClass({
         <div className="content">
           <div className="overlay" onClick={ this.hideSettings }></div>
           <div className="content-inner">
-            <p className="expand-settings" onClick={ this.showSettings }><i className="fa fa-cog"></i> Settings</p>
-            <Header />
+            <Header>
+              <li onClick={ this.showSettings }><i className="fa fa-cog"></i> { TAPi18n.__( 'app.settings.label' ) }</li>
+              <LanguageSwitcher/>
+            </Header>
             <Synth ctx={ ctx } />
             <Footer />
           </div>

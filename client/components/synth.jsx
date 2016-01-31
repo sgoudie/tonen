@@ -1,8 +1,8 @@
 //Creates a new osc
-newOsc = ( ctx, wave, frequency, detune ) => {
+newOsc = ( ctx, wave, frequency, tuning ) => {
   let osc = ctx.createOscillator();
   osc.frequency.value = frequency;
-  osc.detune.value = detune;
+  osc.tuning.value = tuning;
   osc.type = wave;
   return osc;
 };
@@ -12,7 +12,7 @@ Synth = React.createClass({
     return {
       frequency: 440,
       noteLength: 5,
-      detune: 5,
+      tuning: 5,
       wave: 'sine',
       lfoRate: 10,
       lfoWave: 'sine',
@@ -30,14 +30,14 @@ Synth = React.createClass({
     let ctx = this.props.ctx,
         frequency = this.state.frequency,
         noteLength = this.state.noteLength,
-        detune = this.state.detune,
+        tuning = this.state.tuning,
         wave = this.state.wave,
         lfoRate = this.state.lfoRate,
         lfoWave = this.state.lfoWave,
         lfoLevel = this.state.lfoLevel;
 
     let osc1 = newOsc( ctx, wave, frequency, 0 ),
-        osc2 = newOsc( ctx, wave, frequency/2 , -detune );
+        osc2 = newOsc( ctx, wave, frequency/2 , -tuning );
         lfo = newOsc( ctx, lfoWave, lfoRate, 0 ),
         gainNode = ctx.createGain(),
         masterGain = ctx.createGain(),
@@ -73,20 +73,20 @@ Synth = React.createClass({
     return (
       <div className="synth">
         <div className="row">
-          <SynthModule label="Oszillator">
+          <SynthModule label={ TAPi18n.__( 'app.synth.oscillator' ) }>
             <WaveSelector id='wave' defaultValue={ this.state.wave } onUserInput={ this.controlChange } />
-            <ControlSlider id='frequency' label='Frequenz' type='freq' defaultValue={ this.state.frequency } onUserInput={ this.controlChange } min='50' max='1000' />
-            <ControlSlider id='detune' label='Stimmen' defaultValue={ this.state.detune } onUserInput={ this.controlChange } min='0' max='30' />
+            <ControlSlider id='frequency' label={ TAPi18n.__( 'app.synth.frequency' ) } type='freq' defaultValue={ this.state.frequency } onUserInput={ this.controlChange } min='50' max='1000' />
+            <ControlSlider id='tuning' label={ TAPi18n.__( 'app.synth.tuning' ) } defaultValue={ this.state.tuning } onUserInput={ this.controlChange } min='0' max='30' />
           </SynthModule>
-          <SynthModule label="LFO">
+          <SynthModule label={ TAPi18n.__( 'app.synth.lfo' ) }>
             <WaveSelector id='lfoWave' defaultValue={ this.state.lfoWave } onUserInput={ this.controlChange }/>
-            <ControlSlider id='lfoRate' label='Häufigkeit' type='freq' defaultValue={ this.state.lfoRate } onUserInput={ this.controlChange } min='1' max='50' />
-            <ControlSlider id='lfoLevel' label='Lautstärke' defaultValue={ this.state.lfoLevel } onUserInput={ this.controlChange } min='0' max='100' />
+            <ControlSlider id='lfoRate' label={ TAPi18n.__( 'app.synth.rate' ) } type='freq' defaultValue={ this.state.lfoRate } onUserInput={ this.controlChange } min='1' max='50' />
+            <ControlSlider id='lfoLevel' label={ TAPi18n.__( 'app.synth.level' ) } defaultValue={ this.state.lfoLevel } onUserInput={ this.controlChange } min='0' max='100' />
           </SynthModule>
         </div>
         <div className="row">
           <div className="col-12">
-            <button className="btn btn-block" onClick={ this.playNote }>Spielen</button>
+            <button className="btn btn-block" onClick={ this.playNote }>{ TAPi18n.__( 'app.synth.play' ) }</button>
           </div>
         </div>
       </div>

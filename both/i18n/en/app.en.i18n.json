@@ -1,0 +1,24 @@
+{
+  "app" : {
+    "description" : "A simple synthesiser made with the Web Audio API and React.",
+    "github_link" : "View on Github",
+    "attribution" : "A project by S.Goudie",
+    "synth" : {
+      "synthesiser" : "Synthesiser",
+      "oscillator" : "Oscillator",
+      "lfo" : "LFO",
+      "frequency" : "Frequency",
+      "tuning" : "Tuning",
+      "rate" : "Rate",
+      "level" : "Level",
+      "sine" : "Sine",
+      "sawtooth" : "Sawtooth",
+      "square" : "Square",
+      "triangle" : "Triangle",
+      "play" : "Play"
+    },
+    "settings" : {
+      "label" : "Settings"
+    }
+  }
+}

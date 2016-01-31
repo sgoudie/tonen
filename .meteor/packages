@@ -19,3 +19,4 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 react
 fourseven:scss
 fortawesome:fontawesome
+tap:i18n

@@ -1,0 +1,24 @@
+{
+  "app" : {
+    "description" : "Eine Synthesizer einfache mit der Web Audio API und React.",
+    "github_link" : "Auf Github",
+    "attribution" : "Ein Projekt von S.Goudie",
+    "synth" : {
+      "synthesiser" : "Synthesizer",
+      "oscillator" : "Oszillator",
+      "lfo" : "LFO",
+      "frequency" : "Frequenz",
+      "tuning" : "Stimmung",
+      "rate" : "Häufigkeit",
+      "level" : "Lautstärke",
+      "sine" : "Sinus",
+      "sawtooth" : "Sägezahn",
+      "square" : "Quadrat",
+      "triangle" : "Triangel",
+      "play" : "Spiel"
+    },
+    "settings" : {
+      "label" : "Einstellwerte"
+    }
+  }
+}

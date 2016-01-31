@@ -6,7 +6,7 @@
 .header h1 {
   font-size: $baseline*4;
   font-weight: 700;
-  margin: 0 0 $baseline/2 0;
+  margin: $baseline/2 0 $baseline/2 0;
 }
 
 .header p {
@@ -21,4 +21,22 @@
   &:hover {
     border-bottom: 2px solid $feature-color;
   }
+}
+
+.header .header-actions {
+  list-style: none;
+  border-bottom: 2px solid $feature-color;
+  margin: 0;
+  padding: 0 0 $baseline/2 0;
+  text-align: right;
+  height: $baseline;
+}
+
+.header .header-actions li {
+  cursor: pointer;
+  text-transform: uppercase;
+  font-size: $baseline*0.6;
+  letter-spacing: 1px;
+  float: right;
+  margin-left: $baseline;
 }
