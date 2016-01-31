@@ -14,7 +14,7 @@ Synth = React.createClass({
       noteLength: 5,
       detune: 5,
       wave: 'sine',
-      lfoRate: 20,
+      lfoRate: 10,
       lfoWave: 'sine',
       lfoLevel: 10
     };
@@ -73,22 +73,16 @@ Synth = React.createClass({
     return (
       <div className="synth">
         <div className="row">
-          <div className="col-6">
-            <div className="synth-module">
-              <h4 className="synth-module-label">Oszillator</h4>
-              <WaveSelector id='wave' defaultValue={ this.state.wave } onUserInput={ this.controlChange }/>
-              <ControlSlider id='frequency' label='Frequenz' type='freq' defaultValue={ this.state.frequency } onUserInput={ this.controlChange } min='50' max='1000' />
-              <ControlSlider id='detune' label='Stimmen' defaultValue={ this.state.detune } onUserInput={ this.controlChange } min='0' max='30' />
-            </div>
-          </div>
-          <div className="col-6">
-            <div className="synth-module">
-              <h4 className="synth-module-label">LFO</h4>
-              <WaveSelector id='lfoWave' defaultValue={ this.state.lfoWave } onUserInput={ this.controlChange }/>
-              <ControlSlider id='lfoRate' label='Häufigkeit' type='freq' defaultValue={ this.state.lfoRate } onUserInput={ this.controlChange } min='1' max='100' />
-              <ControlSlider id='lfoLevel' label='Lautstärke' defaultValue={ this.state.lfoLevel } onUserInput={ this.controlChange } min='0' max='100' />
-            </div>
-          </div>
+          <SynthModule label="Oszillator">
+            <WaveSelector id='wave' defaultValue={ this.state.wave } onUserInput={ this.controlChange } />
+            <ControlSlider id='frequency' label='Frequenz' type='freq' defaultValue={ this.state.frequency } onUserInput={ this.controlChange } min='50' max='1000' />
+            <ControlSlider id='detune' label='Stimmen' defaultValue={ this.state.detune } onUserInput={ this.controlChange } min='0' max='30' />
+          </SynthModule>
+          <SynthModule label="LFO">
+            <WaveSelector id='lfoWave' defaultValue={ this.state.lfoWave } onUserInput={ this.controlChange }/>
+            <ControlSlider id='lfoRate' label='Häufigkeit' type='freq' defaultValue={ this.state.lfoRate } onUserInput={ this.controlChange } min='1' max='50' />
+            <ControlSlider id='lfoLevel' label='Lautstärke' defaultValue={ this.state.lfoLevel } onUserInput={ this.controlChange } min='0' max='100' />
+          </SynthModule>
         </div>
         <div className="row">
           <div className="col-12">
