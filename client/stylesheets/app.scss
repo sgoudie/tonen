@@ -2,8 +2,10 @@
 
 $baseline: 20px;
 $border-radius-base: 3px;
-$feature-color: #000;
-$background-color: darken(#fff, 5%);
+$feature-color: #241d14;
+$background-color: lighten(#eae2cb, 10%);
+
+@import "_layout.scss";
 
 body {
   font-family: 'Karla', helvetica, arial, sans-serif;
@@ -11,11 +13,10 @@ body {
   color: $feature-color;
 }
 
-@import "_layout.scss";
-
 //Components
 @import "components/_header";
 @import "components/_button";
 @import "components/_control-slider";
 @import "components/_synth-module";
 @import "components/_wave-selector";
+@import "components/_footer";

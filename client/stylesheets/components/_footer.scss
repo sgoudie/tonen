@@ -1,0 +1,14 @@
+.footer {
+  text-align: center;
+  margin: $baseline*2 0 $baseline 0;
+}
+
+.footer p a {
+  text-decoration: none;
+  color: $feature-color;
+  border-bottom: 1px dashed $feature-color;
+  padding-bottom: $baseline/4;
+  &:hover {
+    border-bottom: 2px solid $feature-color;
+  }
+}

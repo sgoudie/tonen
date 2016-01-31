@@ -7,6 +7,7 @@ App = React.createClass({
       <div className="wrapper">
         <Header />
         <Synth ctx={ ctx }/>
+        <Footer />
       </div>
     );
   }
