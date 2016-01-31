@@ -4,19 +4,17 @@ $baseline: 20px;
 $border-radius-base: 3px;
 $feature-color: lighten(#eae2cb, 10%);
 $background-color: #241d14;
+$menu-width: 300px;
 
 @import "_layout.scss";
 
-body {
-  font-family: 'Karla', helvetica, arial, sans-serif;
-  background-color: $background-color;
-  color: $feature-color;
-}
-
 //Components
 @import "components/_header";
+@import "components/_settings";
+
 @import "components/_button";
 @import "components/_control-slider";
 @import "components/_synth-module";
 @import "components/_wave-selector";
+
 @import "components/_footer";

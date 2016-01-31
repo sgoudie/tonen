@@ -1,0 +1,81 @@
+.expand-settings {
+  text-align: right;
+  text-transform: uppercase;
+  font-size: $baseline*0.6;
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding-bottom: $baseline/2;
+  border-bottom: 2px solid $feature-color;
+  margin-top: $baseline/2;
+}
+
+.settings-menu-content {
+  width: 100%;
+  height: 100%;
+  padding: $baseline;
+  background: $feature-color;
+  color: $background-color;
+}
+
+.settings-menu-content .btn {
+  border-color: $background-color;
+  color: $background-color;
+  &:hover {
+    background-color: $background-color;
+    color: $feature-color;
+  }
+}
+
+//////////
+
+.settings-menu {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 100;
+	visibility: hidden;
+	width: $menu-width;
+  max-width: 100%;
+	height: 100%;
+	-webkit-transition: all 0.5s cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
+	transition: all 0.5s;
+}
+
+.settings-open .content {
+	-webkit-transform: translate3d($menu-width*-1, 0, 0);
+	transform: translate3d($menu-width*-1, 0, 0);
+}
+
+.settings-menu {
+	z-index: 1;
+}
+
+.settings-open .settings-menu {
+	visibility: visible;
+	-webkit-transition: -webkit-transform 0.5s cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
+	transition: transform 0.5s cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
+}
+
+.overlay {
+  z-index: 0;
+  visibility: hidden;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background: $background-color;
+	content: '';
+	opacity: 0;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+
+.settings-open .overlay {
+  z-index: 2;
+  visibility: visible;
+	opacity: 0.5;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+  cursor: pointer;
+}

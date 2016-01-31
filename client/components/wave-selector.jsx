@@ -8,17 +8,17 @@ WaveSelector = React.createClass({
   render() {
     return (
       <div className="wave-selector">
-        <label for="sine">
-          <input type="radio" name={ this.props.id } id="sine" value="sine" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'sine' } /> Sinus
+        <label htmlFor={ `${this.props.id}-sine` }>
+          <input type="radio" name={ this.props.id } id={ `${this.props.id}-sine` } value="sine" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'sine' } /> Sinus
         </label>
-        <label for="sawtooth">
-          <input type="radio" name={ this.props.id } id="sawtooth" value="sawtooth" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'sawtooth' } /> Sägezahn
+        <label htmlFor={ `${this.props.id}-sawtooth` }>
+          <input type="radio" name={ this.props.id } id={ `${this.props.id}-sawtooth` } value="sawtooth" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'sawtooth' } /> Sägezahn
         </label>
-        <label for="square">
-          <input type="radio" name={ this.props.id } id="square" value="square" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'square' } /> Quadrat
+        <label htmlFor={ `${this.props.id}-square` }>
+          <input type="radio" name={ this.props.id } id={ `${this.props.id}-square` } value="square" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'square' } /> Quadrat
         </label>
-        <label for="triangle">
-          <input type="radio" name={ this.props.id } id="triangle" value="triangle" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'triangle' } /> Triangel
+        <label htmlFor={ `${this.props.id}-triangle` }>
+          <input type="radio" name={ this.props.id } id={ `${this.props.id}-triangle` } value="triangle" onClick={ this.handleChange } defaultChecked={ this.props.defaultValue === 'triangle' } /> Triangel
         </label>
       </div>
     );

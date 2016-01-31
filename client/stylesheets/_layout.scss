@@ -14,18 +14,47 @@ $breakpoint-medium: "only screen and (min-width: 30em)";
   @include border-box;
 }
 
+html,
+body,
+.wrapper,
+.content {
+	height: 100%;
+  font-family: 'Karla', helvetica, arial, sans-serif;
+}
+
+.wrapper {
+  position: relative;
+	overflow: hidden;
+}
+
+.content,
+.content-inner {
+	position: relative;
+}
+
+.content {
+  overflow-y: scroll;
+  background-color: $background-color;
+  color: $feature-color;
+  left: 0;
+	z-index: 99;
+	height: 100%;
+	-webkit-transition: -webkit-transform 0.5s cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
+	transition: transform 0.5s cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
+}
+
+.content-inner {
+  width: 100%;
+  margin: 0 auto;
+}
+
 img {
   width: auto;
   max-width: 100%;
   height: auto !important;
 }
 
-//Wrapper
-.wrapper {
-  width: 100%;
-  margin: 0 auto;
-}
-
+//Grid
 .wrapper,
 .row {
   @extend %clearfix;
@@ -41,7 +70,7 @@ img {
 
 @media #{$breakpoint-medium} {
 
-  .wrapper {
+  .content-inner {
     width: 95%;
     max-width: $grid-max-width;
   }
