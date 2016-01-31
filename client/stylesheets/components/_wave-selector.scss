@@ -6,4 +6,44 @@
 .wave-selector label {
   display: block;
   margin: $baseline/2 0;
+  cursor: pointer;
+  line-height: $baseline*1.2;
+}
+
+//Hides the inputs in an accessible way
+.wave-selector [type="radio"] {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px; margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.wave-selector [type="radio"] + span::before {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.25em;
+  border-radius: 1em;
+  border: $baseline/10 solid $background-color;
+  box-shadow: 0 0 0 $baseline/16 $feature-color;
+  margin-right: 0.75em;
+}
+
+.wave-selector [type="radio"]:checked + span::before {
+  background: $feature-color;
+  box-shadow: 0 0 0 $baseline/8 $feature-color;
+}
+
+//Adds a focus state arrow
+.wave-selector [type="radio"]:focus + span::after {
+  content: '\f0d9';
+  font-family: 'fontawesome';
+  margin-left: $baseline/2;
+  font-size: $baseline;
+  line-height: $baseline/2;
+  vertical-align: -0.125em;
 }
