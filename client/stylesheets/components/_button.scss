@@ -1,4 +1,4 @@
-button {
+.btn {
   background-color: transparent;
   border: 2px solid $feature-color;
   margin-top: $baseline;
@@ -6,9 +6,14 @@ button {
   color: $feature-color;
   font-size: $baseline*0.8;
   font-weight: 700;
+  border-radius: $border-radius-base;
   &:hover {
     cursor: pointer;
     background-color: $feature-color;
     color: $background-color;
   }
+}
+
+.btn-block {
+  width: 100%;
 }

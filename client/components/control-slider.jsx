@@ -1,4 +1,4 @@
-RangeSlider = React.createClass({
+ControlSlider = React.createClass({
   handleChange() {
     this.props.onUserInput(
       this.refs.range.id,

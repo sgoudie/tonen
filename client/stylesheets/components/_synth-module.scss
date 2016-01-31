@@ -1,0 +1,22 @@
+$synth-module-border-width: 4px;
+
+.synth-module {
+  border: $synth-module-border-width double $feature-color;
+  padding: $baseline;
+  width: 100%;
+  border-radius: $border-radius-base;
+}
+
+.synth-module-label {
+  margin-top: 0;
+  margin-bottom: -$baseline;
+  top: -$baseline*1.5 - $synth-module-border-width/2;
+  position: relative;
+  background-color: $background-color;
+  padding: 0 $baseline/2;
+  display: inline-block;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: $synth-module-border-width*3;
+}

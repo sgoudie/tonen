@@ -1,4 +1,7 @@
+@import '_mixins.scss';
+
 $baseline: 20px;
+$border-radius-base: 3px;
 $feature-color: #000;
 $background-color: darken(#fff, 5%);
 
@@ -8,12 +11,11 @@ body {
   color: $feature-color;
 }
 
-.container {
-  width: 90%;
-  margin: 0 auto;
-}
+@import "_layout.scss";
 
 //Components
+@import "components/_header";
 @import "components/_button";
 @import "components/_control-slider";
+@import "components/_synth-module";
 @import "components/_wave-selector";

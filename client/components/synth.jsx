@@ -72,17 +72,29 @@ Synth = React.createClass({
   render() {
     return (
       <div className="synth">
-        <h2>{ this.state.frequency }hz - { this.state.detune }</h2>
-        <WaveSelector id='wave' defaultValue={ this.state.wave } onUserInput={ this.controlChange }/>
-        <RangeSlider id='frequency' label='Frequenz' type='freq' defaultValue={ this.state.frequency } onUserInput={ this.controlChange } min='50' max='1000' />
-        <RangeSlider id='detune' label='Stimmen' defaultValue={ this.state.detune } onUserInput={ this.controlChange } min='0' max='30' />
-        <div className="synth-module">
-          <h4>LFO</h4>
-          <RangeSlider id='lfoRate' label='Häufigkeit' type='freq' defaultValue={ this.state.lfoRate } onUserInput={ this.controlChange } min='1' max='100' />
-          <RangeSlider id='lfoLevel' label='Lautstärke' defaultValue={ this.state.lfoLevel } onUserInput={ this.controlChange } min='0' max='100' />
-          <WaveSelector id='lfoWave' defaultValue={ this.state.lfoWave } onUserInput={ this.controlChange }/>
+        <div className="row">
+          <div className="col-6">
+            <div className="synth-module">
+              <h4 className="synth-module-label">Oszillator</h4>
+              <WaveSelector id='wave' defaultValue={ this.state.wave } onUserInput={ this.controlChange }/>
+              <ControlSlider id='frequency' label='Frequenz' type='freq' defaultValue={ this.state.frequency } onUserInput={ this.controlChange } min='50' max='1000' />
+              <ControlSlider id='detune' label='Stimmen' defaultValue={ this.state.detune } onUserInput={ this.controlChange } min='0' max='30' />
+            </div>
+          </div>
+          <div className="col-6">
+            <div className="synth-module">
+              <h4 className="synth-module-label">LFO</h4>
+              <WaveSelector id='lfoWave' defaultValue={ this.state.lfoWave } onUserInput={ this.controlChange }/>
+              <ControlSlider id='lfoRate' label='Häufigkeit' type='freq' defaultValue={ this.state.lfoRate } onUserInput={ this.controlChange } min='1' max='100' />
+              <ControlSlider id='lfoLevel' label='Lautstärke' defaultValue={ this.state.lfoLevel } onUserInput={ this.controlChange } min='0' max='100' />
+            </div>
+          </div>
         </div>
-        <button onClick={ this.playNote }>Spielen</button>
+        <div className="row">
+          <div className="col-12">
+            <button className="btn btn-block" onClick={ this.playNote }>Spielen</button>
+          </div>
+        </div>
       </div>
     );
   }

@@ -1,0 +1,24 @@
+.header {
+  text-align: center;
+  margin: $baseline 0 $baseline*2 0;
+}
+
+.header h1 {
+  font-size: $baseline*4;
+  font-weight: 700;
+  margin: $baseline/2 0;
+}
+
+.header p {
+  margin: $baseline/2 0;
+}
+
+.header p a {
+  text-decoration: none;
+  color: $feature-color;
+  border-bottom: 1px dashed $feature-color;
+  padding-bottom: $baseline/4;
+  &:hover {
+    border-bottom: 2px solid $feature-color;
+  }
+}
