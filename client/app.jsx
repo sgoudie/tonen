@@ -22,7 +22,7 @@ App = React.createClass({
           <div className="content-inner">
             <Header>
               <li onClick={ this.showSettings }><i className="fa fa-cog"></i> { TAPi18n.__( 'app.settings.label' ) }</li>
-              <LanguageSwitcher/>
+              {/*<LanguageSwitcher/>*/}
             </Header>
             <Synth ctx={ ctx } />
             <Footer />

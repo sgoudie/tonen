@@ -2,7 +2,7 @@
 newOsc = ( ctx, wave, frequency, tuning ) => {
   let osc = ctx.createOscillator();
   osc.frequency.value = frequency;
-  osc.tuning.value = tuning;
+  osc.detune.value = tuning;
   osc.type = wave;
   return osc;
 };
