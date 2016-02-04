@@ -7,7 +7,7 @@ ControlSlider = React.createClass({
   },
   render() {
     let units;
-    if(this.props.type === 'freq') units = 'hz';
+    if (this.props.type === 'freq') units = 'hz';
     return (
       <div className="control-slider">
         <label>{ this.props.label } - { this.props.defaultValue }{ units }</label>
@@ -22,5 +22,5 @@ ControlSlider = React.createClass({
         />
       </div>
     );
-  }
+  },
 });

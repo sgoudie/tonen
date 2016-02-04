@@ -1,28 +1,30 @@
-const AudioContext = window.AudioContext || window.webkitAudioContext,
-      ctx = new AudioContext();
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const ctx = new AudioContext();
 
 App = React.createClass({
-  getInitialState: function() {
+  getInitialState() {
     return {
-      settingsOpen: false
+      settingsOpen: false,
     };
   },
-  showSettings: function() {
+  showSettings() {
     this.setState({ settingsOpen: true });
   },
-  hideSettings: function() {
+  hideSettings() {
     this.setState({ settingsOpen: false });
   },
   render() {
     return (
-      <div className={ "wrapper " + ( this.state.settingsOpen ? "settings-open " : "" ) }>
+      <div className={ 'wrapper ' + (this.state.settingsOpen ? 'settings-open' : '') }>
         <Settings ref="settingsMenu" closeSettings={ this.hideSettings } />
         <div className="content">
           <div className="overlay" onClick={ this.hideSettings }></div>
           <div className="content-inner">
             <Header>
-              <li onClick={ this.showSettings }><i className="fa fa-cog"></i> { TAPi18n.__( 'app.settings.label' ) }</li>
-              {/*<LanguageSwitcher/>*/}
+              <li onClick={ this.showSettings }>
+                <i className="fa fa-cog"></i> { TAPi18n.__('app.settings.label') }
+              </li>
+              {/* <LanguageSwitcher/> */}
             </Header>
             <Synth ctx={ ctx } />
             <Footer />
@@ -30,5 +32,5 @@ App = React.createClass({
         </div>
       </div>
     );
-  }
+  },
 });

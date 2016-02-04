@@ -1,4 +1,4 @@
-notes = {};
+const notes = {};
 
 notes.c0 = 16.35;
 notes.cs0 = 17.32;

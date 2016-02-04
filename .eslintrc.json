@@ -1,0 +1,48 @@
+{
+    "extends": "airbnb",
+    "plugins": [
+      "react"
+    ],
+    "env": {
+      "meteor": true
+    },
+    "globals": {
+      "App": true,
+      "analytics": true,
+      "Roles": true,
+      "SimpleSchema": true,
+      "FlowRouter": true,
+      "SSR": true,
+      "Picker": true,
+      "FlowRouterSEO": true,
+      "BrowserPolicy": true,
+      "BlazeLayout": true,
+      "TAPi18n": true,
+      "SEO": true,
+      "Bert": true,
+      "bootbox": true,
+      "SyncedCron": true,
+      "Mandrill" : true,
+      "MailChimpLists": true,
+      "IntercomSettings": true,
+      "Typekit": true,
+      "Sortable":true,
+      "uploadcare": true,
+      "UPLOADCARE_LOCALE": true,
+      "UPLOADCARE_TABS": true,
+      "Ucare": true,
+      "jQuery": true,
+      "moment": true,
+      "slack": true,
+      "Auth": true,
+      "Polls": true,
+      "Questions": true,
+      "Options": true,
+      "Themes": true,
+      "Teams": true,
+      "Plans": true,
+      "API": true,
+      "APIKeys": true,
+      "BetaInvites": true
+    }
+}
