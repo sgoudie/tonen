@@ -17,6 +17,8 @@ Synth = React.createClass({
       lfoRate: 10,
       lfoWave: 'sine',
       lfoLevel: 10,
+      filterFrequency: 440,
+      filterQuality: 100,
     };
   },
   /* Takes control from component id
@@ -35,10 +37,18 @@ Synth = React.createClass({
     const lfoRate = this.state.lfoRate;
     const lfoWave = this.state.lfoWave;
     const lfoLevel = this.state.lfoLevel;
+    const filterFrequency = this.state.filterFrequency;
+    const filterQuality = this.state.filterQuality;
 
     const osc1 = newOsc(ctx, wave, frequency, 0);
     const osc2 = newOsc(ctx, wave, frequency / 2, - tuning);
     const lfo = newOsc(ctx, lfoWave, lfoRate, 0);
+
+    const filter = ctx.createBiquadFilter();
+    filter.frequency = filterFrequency;
+    filter.Q = filterQuality;
+    filter.type = 'bandpass';
+
     const gainNode = ctx.createGain();
     const masterGain = ctx.createGain();
     const attackTime = 0.5;
@@ -54,7 +64,8 @@ Synth = React.createClass({
     gainNode.connect(osc2.frequency);
     lfo.connect(gainNode);
 
-    masterGain.connect(ctx.destination);
+    masterGain.connect(filter);
+    filter.connect(ctx.destination);
 
     // Starts osc
     osc1.start();
@@ -82,6 +93,21 @@ Synth = React.createClass({
             <WaveSelector id='lfoWave' defaultValue={ this.state.lfoWave } onUserInput={ this.controlChange }/>
             <ControlSlider id='lfoRate' label={ TAPi18n.__('app.synth.rate') } type='freq' defaultValue={ this.state.lfoRate } onUserInput={ this.controlChange } min='1' max='50' />
             <ControlSlider id='lfoLevel' label={ TAPi18n.__('app.synth.level') } defaultValue={ this.state.lfoLevel } onUserInput={ this.controlChange } min='0' max='100' />
+          </SynthModule>
+          <SynthModule label={ TAPi18n.__('app.synth.filter') }>
+            <ControlSlider
+              id='filterFrequency'
+              label={ TAPi18n.__('app.synth.frequency') }
+              type='freq' defaultValue={ this.state.filterFrequency }
+              onUserInput={ this.controlChange }
+              min="50" max="1000" />
+            <ControlSlider
+              id="filterQuality"
+              label={ TAPi18n.__('app.synth.quality') }
+              type="freq"
+              defaultValue={ this.state.filterQuality }
+              onUserInput={ this.controlChange }
+              min="0" max="100" />
           </SynthModule>
         </div>
         <div className="row">
