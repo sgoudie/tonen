@@ -15,7 +15,7 @@ App = React.createClass({
   },
   render() {
     return (
-      <div className={ 'wrapper ' + (this.state.settingsOpen ? 'settings-open' : '') }>
+      <div className={ `wrapper ${(this.state.settingsOpen ? 'settings-open' : '')}` }>
         <Settings ref="settingsMenu" closeSettings={ this.hideSettings } />
         <div className="content">
           <div className="overlay" onClick={ this.hideSettings }></div>

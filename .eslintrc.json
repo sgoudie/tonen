@@ -8,22 +8,16 @@
     },
     "globals": {
       "App": true,
-      "analytics": true,
-      "Roles": true,
       "SimpleSchema": true,
       "FlowRouter": true,
       "SSR": true,
-      "Picker": true,
       "FlowRouterSEO": true,
       "BrowserPolicy": true,
       "BlazeLayout": true,
       "TAPi18n": true,
-      "Bert": true,
-      "SyncedCron": true,
-      "Ucare": true,
-      "jQuery": true,
       "moment": true,
-      "Auth": true,
-      "Patches": true
+      "Patches": true,
+      "ReactMeteorData": true,
+      "React": true
     }
 }

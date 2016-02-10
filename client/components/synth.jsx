@@ -10,6 +10,11 @@ const newOsc = (ctx, wave, frequency, tuning) => {
 };
 
 Synth = React.createClass({
+  propTypes: {
+    ctx: React.PropTypes.object,
+  },
+  // This mixin makes the getMeteorData method work
+  mixins: [ReactMeteorData],
   getInitialState() {
     return {
       frequency: 440,
@@ -21,6 +26,12 @@ Synth = React.createClass({
       lfoLevel: 10,
       filterFrequency: 440,
       filterQuality: 100,
+    };
+  },
+  // Loads items from the Patches collection and puts them on this.data.patches
+  getMeteorData() {
+    return {
+      patches: Patches.find({}).fetch(),
     };
   },
   /* Takes control from component id
@@ -75,49 +86,89 @@ Synth = React.createClass({
     lfo.start();
 
     // Ramps down to stop click (waveform)
+    const soundTime = ctx.currentTime + attackTime + noteLength + decayTime;
     masterGain.gain.setValueAtTime(0, ctx.currentTime);
     masterGain.gain.linearRampToValueAtTime(0.6, ctx.currentTime + attackTime);
-    masterGain.gain.linearRampToValueAtTime(0, ctx.currentTime + attackTime + noteLength + decayTime);
-    osc1.stop(ctx.currentTime + attackTime + noteLength + decayTime + 1);
-    osc2.stop(ctx.currentTime + attackTime + noteLength + decayTime + 1);
-    lfo.stop(ctx.currentTime + attackTime + noteLength + decayTime + 1);
+    masterGain.gain.linearRampToValueAtTime(0, soundTime);
+    osc1.stop(soundTime + 1);
+    osc2.stop(soundTime + 1);
+    lfo.stop(soundTime + 1);
   },
   render() {
     return (
       <div className="synth">
         <div className="row">
           <SynthModule label={ TAPi18n.__('app.synth.oscillator') }>
-            <WaveSelector id='wave' defaultValue={ this.state.wave } onUserInput={ this.controlChange } />
-            <ControlSlider id='frequency' label={ TAPi18n.__('app.synth.frequency') } type='freq' defaultValue={ this.state.frequency } onUserInput={ this.controlChange } min='50' max='1000' />
-            <ControlSlider id='tuning' label={ TAPi18n.__('app.synth.tuning') } defaultValue={ this.state.tuning } onUserInput={ this.controlChange } min='0' max='30' />
+            <WaveSelector
+              id="wave"
+              defaultValue={ this.state.wave }
+              onUserInput={ this.controlChange }
+            />
+            <ControlSlider
+              id="frequency"
+              label={ TAPi18n.__('app.synth.frequency') }
+              type="freq"
+              defaultValue={ this.state.frequency }
+              onUserInput={ this.controlChange }
+              min="50" max="1000"
+            />
+            <ControlSlider
+              id="tuning"
+              label={ TAPi18n.__('app.synth.tuning') }
+              defaultValue={ this.state.tuning }
+              onUserInput={ this.controlChange }
+              min="0" max="30"
+            />
           </SynthModule>
           <SynthModule label={ TAPi18n.__('app.synth.lfo') }>
-            <WaveSelector id='lfoWave' defaultValue={ this.state.lfoWave } onUserInput={ this.controlChange }/>
-            <ControlSlider id='lfoRate' label={ TAPi18n.__('app.synth.rate') } type='freq' defaultValue={ this.state.lfoRate } onUserInput={ this.controlChange } min='1' max='50' />
-            <ControlSlider id='lfoLevel' label={ TAPi18n.__('app.synth.level') } defaultValue={ this.state.lfoLevel } onUserInput={ this.controlChange } min='0' max='100' />
+            <WaveSelector
+              id="lfoWave"
+              defaultValue={ this.state.lfoWave }
+              onUserInput={ this.controlChange }
+            />
+            <ControlSlider
+              id="lfoRate"
+              label={ TAPi18n.__('app.synth.rate') }
+              type="freq"
+              defaultValue={ this.state.lfoRate }
+              onUserInput={ this.controlChange }
+              min="1" max="50"
+            />
+            <ControlSlider
+              id="lfoLevel"
+              label={ TAPi18n.__('app.synth.level') }
+              defaultValue={ this.state.lfoLevel }
+              onUserInput={ this.controlChange }
+              min="0" max="100"
+            />
           </SynthModule>
           <SynthModule label={ TAPi18n.__('app.synth.filter') }>
             <ControlSlider
-              id='filterFrequency'
+              id="filterFrequency"
               label={ TAPi18n.__('app.synth.frequency') }
-              type='freq' defaultValue={ this.state.filterFrequency }
+              type="freq"
+              defaultValue={ this.state.filterFrequency }
               onUserInput={ this.controlChange }
-              min="50" max="1000" />
+              min="50" max="1000"
+            />
             <ControlSlider
               id="filterQuality"
               label={ TAPi18n.__('app.synth.quality') }
               type="freq"
               defaultValue={ this.state.filterQuality }
               onUserInput={ this.controlChange }
-              min="0" max="100" />
+              min="0" max="100"
+            />
           </SynthModule>
         </div>
         <div className="row">
           <div className="col-12">
-            <button className="btn btn-block" onClick={ this.playNote }>{ TAPi18n.__('app.synth.play') }</button>
+            <button className="btn btn-block" onClick={ this.playNote }>
+              { TAPi18n.__('app.synth.play') }
+            </button>
           </div>
         </div>
       </div>
     );
-  }
+  },
 });

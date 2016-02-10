@@ -1,4 +1,13 @@
 ControlSlider = React.createClass({
+  propTypes: {
+    type: React.PropTypes.string,
+    label: React.PropTypes.string,
+    id: React.PropTypes.string,
+    defaultValue: React.PropTypes.number,
+    min: React.PropTypes.number,
+    max: React.PropTypes.number,
+    onUserInput: React.PropTypes.func,
+  },
   handleChange() {
     this.props.onUserInput(
       this.refs.range.id,

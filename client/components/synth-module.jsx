@@ -1,4 +1,8 @@
 SynthModule = React.createClass({
+  propTypes: {
+    label: React.PropTypes.string,
+    children: React.PropTypes.node,
+  },
   render() {
     return (
       <div className="col-4">

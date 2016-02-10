@@ -1,4 +1,7 @@
 Settings = React.createClass({
+  propTypes: {
+    closeSettings: React.PropTypes.func,
+  },
   render() {
     return (
       <div className="settings-menu">
@@ -9,6 +12,6 @@ Settings = React.createClass({
           </button>
         </div>
       </div>
-    )
-  }
+    );
+  },
 });
