@@ -1,3 +1,5 @@
+Meteor.subscribe('patches');
+
 // Creates a new osc
 const newOsc = (ctx, wave, frequency, tuning) => {
   const osc = ctx.createOscillator();
